@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from example_form.views import TestFormView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url('', TestFormView.as_view(), name="index")
 ]
