@@ -19,5 +19,5 @@ from example_form.views import TestFormView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('', TestFormView.as_view(), name="index")
+    url('^', TestFormView.as_view(), name="index")
 ]

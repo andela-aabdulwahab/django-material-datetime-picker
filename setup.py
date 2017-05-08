@@ -40,3 +40,5 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
 )
+
+# python setup.py develop to pip install a development Environment
