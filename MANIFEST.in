@@ -1,0 +1,1 @@
+recursive-include django_material_datetime_picker/static/md-date-time-picker/dist *
