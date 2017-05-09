@@ -10,9 +10,6 @@ setup(
     include_package_data=True,
     license='MIT',
     install_requires=['django'],
-    package_data={'django_material_datetime_picker':
-                  ['static/md-date-time-picker/dist/css/*.css',
-                   'static/md-date-time-picker/dist/js/*.js']},
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha

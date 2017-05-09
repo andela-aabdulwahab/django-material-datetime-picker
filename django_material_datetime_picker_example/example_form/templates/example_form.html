@@ -1,11 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
     <title>Example Form</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en'
+      rel='stylesheet' type='text/css'>
+      {{ form.media }}
   </head>
   <body>
     <div class="form-container">
       {{ form.as_p }}
     </div>
+    <div>
+      <button id="date-dialog"> Open Date Dialog</button>
+      <button id="time-dialog"> Open Time Dialog</button>
+    </div>
   </body>
+  <script type="text/javascript">
+    var dateDialog = new mdDateTimePicker.default({
+      type: 'date',
+      orientation: 'PORTRAIT'
+    });
+    var toggleButton = document.getElementById('date-dialog');
+    toggleButton.addEventListener('click', function() {
+      dateDialog.toggle();
+    });
+
+    var timeDialog = new mdDateTimePicker.default({
+      type: 'time',
+      orientation: 'PORTRAIT'
+    });
+    var toggleButton = document.getElementById('time-dialog');
+    toggleButton.addEventListener('click', function() {
+      timeDialog.toggle();
+    });
+  </script>
 </html>
