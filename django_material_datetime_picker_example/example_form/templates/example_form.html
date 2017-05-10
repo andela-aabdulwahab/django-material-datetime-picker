@@ -9,30 +9,34 @@
   </head>
   <body>
     <div class="form-container">
-      {{ form.as_p }}
+      <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Submit" />
+      </form>
     </div>
     <div>
-      <button id="date-dialog"> Open Date Dialog</button>
-      <button id="time-dialog"> Open Time Dialog</button>
+      <!-- <button id="date-dialog"> Open Date Dialog</button>
+      <button id="time-dialog"> Open Time Dialog</button> -->
     </div>
   </body>
   <script type="text/javascript">
-    var dateDialog = new mdDateTimePicker.default({
-      type: 'date',
-      orientation: 'PORTRAIT'
-    });
-    var toggleButton = document.getElementById('date-dialog');
-    toggleButton.addEventListener('click', function() {
-      dateDialog.toggle();
-    });
-
-    var timeDialog = new mdDateTimePicker.default({
-      type: 'time',
-      orientation: 'PORTRAIT'
-    });
-    var toggleButton = document.getElementById('time-dialog');
-    toggleButton.addEventListener('click', function() {
-      timeDialog.toggle();
-    });
+    // var dateDialog = new mdDateTimePicker.default({
+    //   type: 'date',
+    //   orientation: 'PORTRAIT'
+    // });
+    // var toggleButton = document.getElementById('date-dialog');
+    // toggleButton.addEventListener('click', function() {
+    //   dateDialog.toggle();
+    // });
+    //
+    // var timeDialog = new mdDateTimePicker.default({
+    //   type: 'time',
+    //   orientation: 'PORTRAIT'
+    // });
+    // var toggleButton = document.getElementById('time-dialog');
+    // toggleButton.addEventListener('click', function() {
+    //   timeDialog.toggle();
+    // });
   </script>
 </html>

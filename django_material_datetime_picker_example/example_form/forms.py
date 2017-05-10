@@ -1,8 +1,8 @@
 from django import forms
-from django_material_datetime_picker.widget import DateInput
+from django_material_datetime_picker.widget import MdDateInput, MdTimeInput
 
 
 class DateTimeForm(forms.Form):
-    date = forms.DateField(widget=DateInput)
-    time = forms.TimeField()
-    datetime = forms.DateTimeField(widget=forms.DateInput)
+    date = forms.DateField(widget=MdDateInput)
+    time = forms.TimeField(widget=MdTimeInput(attrs={'placeholder': 'Select Time'}))
+    # datetime = forms.DateTimeField(widget=forms.DateInput)
