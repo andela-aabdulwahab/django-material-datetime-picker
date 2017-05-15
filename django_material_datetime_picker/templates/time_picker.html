@@ -1,15 +1,16 @@
 {% include "django/forms/widgets/input.html" %}
 <script>
-  var timeInputComponent = document.getElementById("{{ widget.attrs.id }}");
-  var TimeDialog = new mdDateTimePicker.default({
-    type: 'time'
-  });
-  TimeDialog.trigger = timeInputComponent;
-  timeInputComponent.addEventListener('click', function(event) {
-    TimeDialog.toggle();
-  });
-  timeInputComponent.addEventListener('onOk', function() {
-    // console.log(TimeDialog.time.format('HH:mm:ss Z'));
-    this.value = TimeDialog.time.format('HH:mm:ss').toString();
-  });
+  (function(){
+    var timeInputComponent = document.getElementById("{{ widget.attrs.id }}");
+    var TimeDialog = new mdDateTimePicker.default({
+      type: 'time'
+    });
+    TimeDialog.trigger = timeInputComponent;
+    timeInputComponent.addEventListener('click', function(event) {
+      TimeDialog.toggle();
+    });
+    timeInputComponent.addEventListener('onOk', function() {
+      this.value = TimeDialog.time.format("{{ widget.attrs.format }}").toString();
+    });
+  }())
 </script>
