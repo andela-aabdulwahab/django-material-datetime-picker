@@ -1,15 +1,16 @@
-from django.forms.widgets import (DateInput, DateTimeInput, TimeInput,
-                                  SelectDateWidget, Media)
+from django.forms.widgets import (DateInput, DateTimeInput, TimeInput, Media,
+                                  MultiWidget)
 import uuid
 from django.utils import formats
+from django.forms.utils import to_current_timezone
 
 
-class MediaMixin(object):
+class MdPickerMixin(object):
 
     format_type = None
 
     format_map = (
-        #Date
+        # Date
         ('DD', r'%d'),
         ('dddd', r'%A'),
         ('ddd', r'%a'),
@@ -49,14 +50,40 @@ class MediaMixin(object):
     media = property(_media)
 
     def get_context(self, name, value, attrs):
-        context = super(MediaMixin, self).get_context(name, value, attrs)
+        context = super(MdPickerMixin, self).get_context(name, value, attrs)
         context['widget']['attrs']['id'] = 'id_' + uuid.uuid4().hex
-        context['widget']['attrs']['format'] = self.conv_datetime_format_py2js(formats.get_format(self.format_key)[0])
+        format = self.format or formats.get_format(self.format_key)[0]
+        context['widget']['attrs']['format'] = \
+            self.conv_datetime_format_py2js(format)
         return context
 
 
-class MdDateInput(MediaMixin, DateInput):
+class DateWidget(MdPickerMixin, DateInput):
     template_name = 'date_picker.html'
 
-class MdTimeInput(MediaMixin, TimeInput):
+
+class TimeWidget(MdPickerMixin, TimeInput):
     template_name = 'time_picker.html'
+
+
+class DateTimeWidget(MultiWidget):
+
+    def __init__(self, attrs=None, date_format=None, time_format=None,
+                 date_attrs=None, time_attrs=None):
+        widgets = (
+            DateWidget(
+                attrs=attrs if date_attrs is None else date_attrs,
+                format=date_format,
+            ),
+            TimeWidget(
+                attrs=attrs if time_attrs is None else time_attrs,
+                format=time_format,
+            ),
+        )
+        super().__init__(widgets)
+
+    def decompress(self, value):
+        if value:
+            value = to_current_timezone(value)
+            return [value.date(), value.time().replace(microsecond=0)]
+        return [None, None]
