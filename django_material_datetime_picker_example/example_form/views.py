@@ -14,5 +14,4 @@ class TestFormView(FormView):
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         print(form.is_valid())
-        print(get_format('DATETIME_INPUT_FORMATS'))
         return super(TestFormView, self).post(request, *args, **kwargs)
