@@ -5,6 +5,7 @@
     var DateDialog = new mdDateTimePicker.default({
       type: 'date',
       orientation: 'PORTRAIT',
+      init: {% if widget.value %} moment("{{ widget.value }}", "{{ widget.attrs.format }}") {% else %} moment() {% endif %},
       past: moment().subtract(1000, 'years'),
       future: moment().add(1000, 'years')
     });
@@ -15,5 +16,5 @@
     dateInputComponent.addEventListener('onOk', function() {
       this.value = DateDialog.time.format("{{ widget.attrs.format }}").toString();
     });
-  }())
+  }());
 </script>

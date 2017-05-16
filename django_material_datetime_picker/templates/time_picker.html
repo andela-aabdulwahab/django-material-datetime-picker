@@ -3,7 +3,8 @@
   (function(){
     var timeInputComponent = document.getElementById("{{ widget.attrs.id }}");
     var TimeDialog = new mdDateTimePicker.default({
-      type: 'time'
+      type: 'time',
+      init: {% if widget.value %} moment("{{ widget.value }}", "{{ widget.attrs.format }}") {% else %} moment() {% endif %},
     });
     TimeDialog.trigger = timeInputComponent;
     timeInputComponent.addEventListener('click', function(event) {
@@ -12,5 +13,5 @@
     timeInputComponent.addEventListener('onOk', function() {
       this.value = TimeDialog.time.format("{{ widget.attrs.format }}").toString();
     });
-  }())
+  }());
 </script>
