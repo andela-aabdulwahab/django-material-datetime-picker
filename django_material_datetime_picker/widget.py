@@ -66,7 +66,7 @@ class TimeWidget(MdPickerMixin, TimeInput):
     template_name = 'time_picker.html'
 
 
-class DateTimeWidget(MultiWidget):
+class SplitDateTimeWidget(MultiWidget):
 
     def __init__(self, attrs=None, date_format=None, time_format=None,
                  date_attrs=None, time_attrs=None):
